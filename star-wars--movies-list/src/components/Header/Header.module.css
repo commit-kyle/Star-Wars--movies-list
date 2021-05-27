@@ -1,0 +1,27 @@
+.background img {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+
+.header {
+	width: 100%;
+	height: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+  margin: 2rem 0 2rem;
+}
+
+.logo {
+	width: 192px;
+	cursor: pointer;
+}
+
+.logo img {
+	width: 100%;
+	height: auto;
+}
