@@ -1,15 +1,19 @@
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 
-import './App.css';
+import classes from './App.css';
 
+import Header from './components/Header/Header';
+import Spinner from './components/UI/LoadingSpinner/Spinner';
 import MovieList from './components/Movies/MovieList/MovieList';
 
 function App() {
 	const [movies, setMovies] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const baseURL = 'https://swapi.dev/api/films/';
 
 	const fetchMoviesHandler = async () => {
+		setIsLoading(true);
 
 		const response = await fetch(baseURL);
 		const data = await response.json();
@@ -24,16 +28,18 @@ function App() {
 		});
 
 		setMovies(transformedMovies);
+		setIsLoading(false);
 	};
 
 	return (
-		<Fragment>
+		<div className={classes.main}>
+			<Header />
 			<section>
 				<button onClick={fetchMoviesHandler}>Fetch Movies</button>
 			</section>
-			<section><MovieList movies={movies}/>
-			</section>
-		</Fragment>
+			{!isLoading && movies.length > 0 && <MovieList movies={movies} />}
+			{isLoading && <Spinner />}
+		</div>
 	);
 }
 
